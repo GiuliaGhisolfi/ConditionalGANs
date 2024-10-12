@@ -33,6 +33,11 @@ def main():
         conditions_dim=6,
         len_input_seq=len_input_seq,
         len_output_seq=len_generated_seq,
+        n_filters=[16, 8, 8],
+        kernel_size=[5, 3, 1],
+        stride=[1, 1, 1],
+        padding=['same', 'same', 'same'],
+        hidden_dims=[128, 128],
     )
 
     discriminator = make_discriminator(
@@ -45,21 +50,23 @@ def main():
         discriminator=discriminator,
         len_input_seq=len_input_seq,
         len_generated_seq=len_generated_seq,
-        patience=3,
-        learning_rate_generator=0.005,
-        learning_rate_discriminator=0.002,
-        n_critic=3,  # number of critic updates per generator update
-        clip_value=0.015,
+        patience=5,
+        learning_rate_generator=0.01,
+        learning_rate_discriminator=0.01,
+        n_critic=5,  # number of critic updates per generator update
+        clip_value=0.01,
         discriminator_gradient_penalty_weight=0.02,
-        generator_wloss_weight=0, #0.1,
-        generator_flow_loss_weight=0, #0.4,
-        generator_mse_weight=1
+        generator_wloss_weight=0.5,
+        generator_flow_loss_weight=0.3,
+        generator_mse_weight=0.15,
+        color_weight=0.05,
+        save_path = 'wgan_train_obj'
     )
 
     gan.train(
-        X_train_z[:500], X_train[:500], cX_train[:500], # noise, real images, conditions
-        X_val_z[:500], X_val[:500], cX_val[:500],
-        epochs=2, batch_size=200
+        X_train_z, X_train, cX_train, # noise, real images, conditions
+        X_val_z, X_val, cX_val,
+        epochs=20, batch_size=1
     )
 
 if __name__ == '__main__':
