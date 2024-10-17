@@ -1,6 +1,4 @@
 import numpy as np
-import tensorflow as tf
-import tensorflow_addons as tfa
 from tensorflow.keras import Model, layers
 from tensorflow.keras.initializers import RandomNormal, Zeros
 from tensorflow.keras.layers import (Concatenate, Conv2DTranspose, Dense,
@@ -78,8 +76,6 @@ def make_generator(
 
     # Concatenate the intermediate output with the input images
     previous_layer = layers.Concatenate()([x, X_reshaped[:, 0, :, :, :]])
-    """for j in range(1, len_input_seq):
-        previous_layer = layers.Concatenate()([previous_layer, X_reshaped[:, j, :, :, :]])"""
 
     for j in range(len_input_seq+len_output_seq-1):
         for i in range(len(n_filters)):
@@ -92,8 +88,6 @@ def make_generator(
                 kernel_initializer=RandomNormal(mean=image_mean, stddev=image_std, seed=random_seed),
                 bias_initializer=Zeros(),
             )(previous_layer)
-            #x_output = LeakyReLU(alpha=alpha)(x_output)
-            #x_output = tfa.layers.InstanceNormalization()(x_output)
         
         last_kernel_size = (image_dim[1] - (x_output.shape[1] - 1) * 1 + 2 * 0) #(output_dim - (input_dim - 1) * stride + 2 * padding)
         x_output = Conv2DTranspose(
