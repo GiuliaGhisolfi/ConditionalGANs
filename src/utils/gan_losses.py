@@ -57,13 +57,9 @@ def discriminator_loss(real_output, fake_output, real_images, fake_images, discr
     real_loss = tf.keras.losses.BinaryCrossentropy()(tf.ones_like(real_output), real_output)
     fake_loss = tf.keras.losses.BinaryCrossentropy()(tf.zeros_like(fake_output), fake_output)
     loss = real_loss + fake_loss
-    if tf.math.is_nan(loss):
-        loss = tf.where(tf.math.is_nan(loss), tf.constant(2.0), loss)
 
     #loss = -tf.reduce_mean(real_output) + tf.reduce_mean(fake_output)
     gp_loss = gp_weight * gradient_penalty(discriminator, real_images, fake_images)
-    if tf.math.is_nan(gp_loss):
-        gp_loss = tf.where(tf.math.is_nan(gp_loss), tf.constant(2.0), gp_loss)
 
     return loss + gp_weight * gp_loss
 
@@ -181,8 +177,6 @@ def generator_loss(real_images, fake_images, fake_output,
     """
     # Compute the Wasserstein loss for the generator
     wasserstein_loss = -tf.reduce_mean(fake_output)
-    if tf.math.is_nan(wasserstein_loss):
-        wasserstein_loss = tf.where(tf.math.is_nan(wasserstein_loss), tf.constant(2.0), wasserstein_loss)
 
     # Compute the optical flow loss between the real and fake images
     optical_flow_loss_value = optical_flow_loss(real_images, fake_images)
@@ -191,13 +185,9 @@ def generator_loss(real_images, fake_images, fake_output,
 
     # Compute the mean squared error between the real and fake images
     mse = mean_squared_error(real_images, fake_images)
-    if tf.math.is_nan(mse):
-        mse = tf.where(tf.math.is_nan(mse), tf.constant(2.0), mse)
 
     # Compute color loss
     color_loss_value = color_loss(real_images, fake_images)
-    if tf.math.is_nan(color_loss_value):
-        color_loss_value = tf.where(tf.math.is_nan(color_loss_value), tf.constant(2.0), color_loss_value)
 
     # Combine the losses with the specified weights
     loss = (wasserstein_weight * wasserstein_loss + flow_weight * optical_flow_loss_value +
