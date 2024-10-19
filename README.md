@@ -1,5 +1,8 @@
-# ConditionalGANs
-Conditional GANs for Video Prediction - Visual model for robot control
+# Conditional GANs
+### Conditional GANs for Video Prediction - Visual model for robot control
+
+This repository contains implementations of Conditional GANs (CGANs) and Autoencoders designed for video prediction tasks. 
+The goal of this project is to develop a visual prediction model to assist in robot control through video frame generation. Various generative models, such as WGANs, VAEs, and Conditional VAEs, are implemented to predict and generate future frames in a video sequence.
 
 ## Folder Structure
 
