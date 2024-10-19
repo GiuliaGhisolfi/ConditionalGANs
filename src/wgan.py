@@ -9,6 +9,18 @@ from src.utils.gan_losses import discriminator_loss, generator_loss
 
 
 class WassersteinGAN:
+    """
+    Wasserstein GAN model class.
+
+    This class defines a Wasserstein GAN model that consists of a generator and a critic.
+
+    The model is trained using the Wasserstein loss function and the gradient penalty loss function.
+
+    The model is trained using the WGAN-GP algorithm, which consists of training the critic more times than the generator
+    and clipping the critic's weights to enforce the Lipschitz constraint.
+
+    This training process is used to stabilize the training of GANs and generate realistic images.
+    """
     def __init__(
             self,
             generator,

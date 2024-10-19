@@ -20,6 +20,16 @@ np.random.seed(RANDOM_SEED)
 tf.random.set_seed(RANDOM_SEED)
 
 class IdentityPreservingVAE(VariationalAutoEncoder):
+    """
+    Identity Preserving Variational Autoencoder model class.
+    This class is an extension of the VariationalAutoEncoder class that includes a decoder model that outputs
+    the original image and conditional information as output.
+
+    This model is used to generate images that are similar to the input images, while preserving the conditional information.
+
+    Args:
+        VariationalAutoEncoder (class): VariationalAutoEncoder class
+    """
     def __init__(self, input_dim, conditions_dim, latent_dim=128, **kwargs):
         self.conditions_dim = conditions_dim
         super().__init__(input_dim, latent_dim, encoder_name='ip_vae_encoder', **kwargs)

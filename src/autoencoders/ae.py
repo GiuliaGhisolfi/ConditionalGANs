@@ -20,6 +20,20 @@ np.random.seed(RANDOM_SEED)
 tf.random.set_seed(RANDOM_SEED)
 
 class AutoEncoder():
+    """
+    Autoencoder model for unsupervised learning.
+
+    The autoencoder model is used to learn a compressed representation of the input data
+    by training an encoder-decoder architecture to minimize the reconstruction error.
+
+    The autoencoder model is defined as follows:
+        - The encoder takes the input data and compresses it into a latent representation.
+        - The decoder takes the latent representation and reconstructs the input data.
+        - The autoencoder is trained to minimize the difference between the input data and the reconstructed data.
+    
+    This class provides methods to train the autoencoder model, encode and decode data, visualize the loss, and it can be extended
+    to implement more complex architectures.
+    """
     def __init__(
         self,
         input_dim,

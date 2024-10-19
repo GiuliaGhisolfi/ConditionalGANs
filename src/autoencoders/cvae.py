@@ -22,6 +22,13 @@ np.random.seed(RANDOM_SEED)
 tf.random.set_seed(RANDOM_SEED)
 
 class ConditionalVAE(VariationalAutoEncoder):
+    """
+    Conditional Variational Autoencoder model class.
+    This class ii is an extension of the VariationalAutoEncoder class that includes a condition vector in the encoder and decoder models.
+
+    Args:
+        VariationalAutoEncoder (class): VariationalAutoEncoder class
+    """
     def __init__(self, input_dim, conditions_dim, latent_dim=128, **kwargs):
         self.conditions_dim = conditions_dim # dimension of the condition vector
         super().__init__(input_dim, latent_dim, **kwargs)

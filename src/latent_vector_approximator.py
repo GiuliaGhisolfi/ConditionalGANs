@@ -29,6 +29,21 @@ def convolutional_layers_params(n_conv_layers):
     return kernel_size, stride, padding
 
 class LatentVectorApproximator:
+    """
+    Latent Vector Approximator model class.
+
+    This class defines a model that approximates the latent vectors of an input image.
+    The model is composed of a Variational Autoencoder (VAE), two Generators, and an Identity Preserving VAE (IPvae).
+
+    The VAE is used to learn the distribution of the latent space.
+    The first Generator is used to generate an image from the latent vector.
+    The IPvae is used to preserve the identity of the input image while changing the latent vector.
+    The second Generator is used to generate an image from the latent vector obtained from the IPvae.
+
+    The model is trained in two steps:
+    1. Pre-training: the VAE, the first Generator, and the IPvae are trained separately.
+    2. Fine-tuning: the model is built from the pre-trained models, and the entire model is fine-tuned.
+    """
     def __init__(
         self,
         input_dim,

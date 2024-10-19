@@ -20,6 +20,11 @@ np.random.seed(RANDOM_SEED)
 tf.random.set_seed(RANDOM_SEED)
 
 class Generator:
+    """
+    Generator model class.
+    This class defines a generator model that takes a latent representation and conditional information as input
+    and outputs an image.
+    """
     def __init__(
         self,
         input_dim,

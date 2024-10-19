@@ -17,6 +17,19 @@ RANDOM_SEED = 42
 tf.random.set_seed(RANDOM_SEED)
 
 class ReparameterizationLayer(Layer):
+    """
+    Reparameterization layer class.
+    This class defines a custom Keras layer that implements the reparameterization trick used in variational autoencoders.
+
+    The reparameterization trick is used to sample latent vectors from a Gaussian distribution, which allows the model to learn
+    the distribution of the latent space.
+
+    The reparameterization trick is necessary because the backpropagation algorithm cannot pass through a random node,
+    so the model needs to sample the latent vectors in a differentiable way.
+
+    Args:
+        Layer (class): Keras Layer class
+    """
     def call(self, inputs, random_seed=RANDOM_SEED):
         '''Reparameterization trick to sample z from Gaussian distribution.'''
         z_mean, z_log_var = inputs
@@ -31,6 +44,14 @@ class ReparameterizationLayer(Layer):
         return z
 
 class VariationalAutoEncoder(AutoEncoder):
+    """
+    Variational Autoencoder model class.
+    This class is an extension of the AutoEncoder class that includes a reparameterization layer in the encoder model,
+    which allows the model to sample latent vectors from a Gaussian distribution.
+
+    Args:
+        AutoEncoder (class): AutoEncoder class
+    """
     def __init__(self, input_dim, latent_dim=128, **kwargs):
         if 'encoder_name' not in kwargs:
             kwargs['encoder_name'] = 'vae_encoder'
