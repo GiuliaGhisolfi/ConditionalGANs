@@ -1,9 +1,0 @@
-data
-__pycache__
-.vscode
-saved_model
-predictions
-
-generated_images copy
-gif
-dummy_data_visualization.ipynb
