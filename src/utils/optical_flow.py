@@ -1,29 +1,19 @@
-import warnings
-
-import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
+############# OPTICAL FLOW #############
+"""
+    This module contains the functions used to compute the optical flow between two consecutive frames of a video sequence.
+    The optical flow is a vector field that represents the motion of objects in the video sequence between two frames.
+
+    The optical flow is computed comparing the intensity of pixels in the two frames, which estimates the motion of 
+    objects in the video sequence.
+
+    The optical flow is used in the GAN training process to generate realistic video sequences by predicting the motion
+    of objects in the video frames.
+"""
 
 def get_optical_flow(previous_image, current_frame):
-    """
-    previous = cv2.cvtColor(previous_image, cv2.COLOR_BGR2GRAY)
-    current = cv2.cvtColor(current_frame, cv2.COLOR_BGR2GRAY)
-
-    flow = cv2.calcOpticalFlowFarneback(previous, current, None, 0.5, 3, 15, 3, 5, 1.2, 0)
-
-    magnitude, angle = cv2.cartToPolar(flow[...,0], flow[...,1])
-
-    hsv = np.zeros_like(previous_image) # hue, saturation, value
-    hsv[...,1] = 255 # saturation
-
-    hsv[...,0] = angle*180/np.pi/2
-    hsv[...,2] = cv2.normalize(magnitude, None, 0, 255, cv2.NORM_MINMAX)
-
-    bgr = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
-    
-    return bgr
-    """
     flow = current_frame - previous_image
     return flow
 

@@ -5,9 +5,25 @@ from tensorflow.keras.layers import (Concatenate, Conv2DTranspose, Dense,
                                      Dropout, Input, LeakyReLU, Permute,
                                      Reshape)
 
-#from src.utils.gan_losses import pretrain_generator_loss
-
 RANDOM_SEED = 42
+
+############# GENERATOR #############
+"""
+    This module contains the generator model used in the GAN training process.
+
+    The generator model is used to generate fake images that rappresent consecutive frames of a video sequence,
+    given as input a latente rappresentation of previous frames, conditional information and the previous frames.
+    
+    The generator model is defined as follows:
+        - The input to the generator is a sequence of images, a sequence of latent vectors and a sequence of conditional information.
+        - The generator uses a series of dense layers to generate a context vector that combines the latent vectors
+            and the conditional information.
+        - The contestual information is then used as input with each frame of the video sequence to generate the next one using
+            a series of transposed convolutional layers.
+        - Teacher forcing is used to train the generator by providing the ground truth frames as input to the generator for
+            the first frames of the video sequence, and then using the generated frames as input for the subsequent frames.
+        - The output of the generator is a sequence of images that represent the next frames of the video sequence.
+"""
 
 def make_generator(
     image_dim=[3, 64, 64],
@@ -27,6 +43,63 @@ def make_generator(
     image_std = 0.33011988,
     random_seed=RANDOM_SEED
 ):
+    """
+    Create the generator model used in the GAN training process.
+
+    Args:
+        image_dim (list, optional):
+            The shape of the input images (channels, height, width).
+            Defaults to [3, 64, 64].
+        latent_dim (int, optional):
+            The dimension of the latent space.
+            Defaults to 1280.
+        conditions_dim (int, optional):
+            The dimension of the conditional information.
+            Defaults to 6.
+        len_input_seq (int, optional):
+            The length of the input sequence.
+            Defaults to 2.
+        len_output_seq (int, optional):
+            The length of the output sequence.
+            Defaults to 2.
+        n_filters (list, optional):
+            The number of filters in each convolutional layer.
+            Defaults to [32, 16, 64].
+        kernel_size (list, optional):
+            The size of the kernel in each convolutional layer.
+            Defaults to [5, 3, 1].
+        stride (list, optional):
+            The stride of the convolution in each convolutional layer.
+            Defaults to [1, 1, 1].
+        padding (list, optional):
+            The padding type in each convolutional layer.
+            Defaults to ['same', 'same', 'same'].
+        hidden_dims (list, optional):
+            The number of units in each hidden layer.
+            Defaults to [128, 128].
+        dropout (float, optional):
+            The dropout rate to use in the hidden layers.
+            Defaults to 0.3.
+        alpha (float, optional):
+            The alpha value for LeakyReLU activation.
+            Defaults to 0.2.
+        activation (str, optional):
+            The activation function to use in the hidden layers.
+            Defaults to 'leaky_relu'.
+        image_mean (float, optional):
+            The mean value of the image data, used for weight initialization.
+            Defaults to 0.36472765.
+        image_std (float, optional):
+            The standard deviation of the image data, used for weight initialization.
+            Defaults to 0.33011988.
+        random_seed (int, optional):
+            The random seed for weight initialization.
+            Defaults to RANDOM_SEED.
+
+    Returns:
+        generator(keras.Model):
+            The generator model
+    """
     # Input layers
     X_input = Input(shape=(len_input_seq, *image_dim), dtype='float32')
     X_reshaped = Permute((1, 3, 4, 2))(X_input)

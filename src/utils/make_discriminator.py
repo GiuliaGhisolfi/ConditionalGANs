@@ -32,6 +32,47 @@ def make_discriminator(
     alpha=0.2,
     random_seed=RANDOM_SEED,
 ):
+    """
+    Create the discriminator model used in the GAN training process.
+
+    Args:
+        input_dim (tuple):
+            The shape of the input images (channels, height, width).
+        len_input_seq (int, optional):
+            The length of the input sequence.
+            Defaults to 1.
+        n_filters (list, optional):
+            The number of filters in each convolutional layer.
+            Defaults to [4, 4].
+        kernel_size (list, optional):
+            The size of the kernel in each convolutional layer.
+            Defaults to [3, 3].
+        stride (list, optional):
+            The stride of the convolution in each convolutional layer.
+            Defaults to [1, 2].
+        padding (list, optional):
+            The padding type in each convolutional layer.
+            Defaults to ['same', 'same'].
+        hidden_dims (list, optional):
+            The number of units in each hidden layer.
+            Defaults to [512, 256, 128, 64].
+        activation (str, optional):
+            The activation function to use in the hidden layers.
+            Defaults to 'relu'.
+        dropout (float, optional):
+            The dropout rate to use in the hidden layers.
+            Defaults to 0.4.
+        alpha (float, optional):
+            The alpha value for LeakyReLU activation.
+            Defaults to 0.2.
+        random_seed (int, optional):
+            The random seed for weight initialization.
+            Defaults to RANDOM_SEED.
+
+    Returns:
+        discriminator(keras.Model):
+            The discriminator model
+    """
     if len_input_seq == 1:
         input_layer = Input(shape=input_dim, dtype='float32')
 
