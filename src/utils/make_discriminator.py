@@ -7,6 +7,18 @@ from tensorflow.keras.models import Model
 
 RANDOM_SEED = 42
 
+############# DISCRIMINATOR #############
+"""
+    This module contains the discriminator model used in the GAN training process.
+    The discriminator model is used to classify the input images as real or fake.
+
+    The discriminator model is defined as follows:
+        - The input layer takes the input images and passes them through a series of convolutional layers
+            to extract features from the images, followed by a series of fully connected layers.
+        - The output layer is a single unit that outputs the probability of the input image being real or fake,
+            using a sigmoid activation function to output a value between 0 and 1.
+"""
+
 def make_discriminator(
     input_dim,
     len_input_seq=1,
@@ -34,7 +46,7 @@ def make_discriminator(
                     kernel_initializer=RandomNormal(stddev=0.01, seed=random_seed),
                     bias_initializer=Zeros(),
                 )(x_image)
-        x = Flatten()(x_image) # TODO: change name
+        x = Flatten()(x_image)
 
         #x = Concatenate()([x_image, condition_layer])
 

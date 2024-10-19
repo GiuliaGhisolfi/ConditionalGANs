@@ -3,6 +3,21 @@ import tensorflow as tf
 
 from src.utils.optical_flow import get_optical_flow_batch
 
+############# GAN LOSS FUNCTIONS #############
+"""
+    This module contains the loss functions used in the GAN training process.
+    The loss functions are used to train the generator and the critic in the WGAN-GP model.
+
+    The loss functions are defined as follows:
+        - The critic loss function tries to maximize the critic's output on real data
+            and minimize the critic's output on fake data,
+            while enforcing the Lipschitz constraint on the critic.
+
+        - The generator loss function tries to minimize the critic's output on fake data,
+            the mean squared error between the real and fake images, and the difference between the
+            optical flow of the real and fake images.
+"""
+
 ############# CRITIC LOSS FUNCTIONS #############
 
 def gradient_penalty(critic, real_images, fake_images):
@@ -194,53 +209,3 @@ def generator_loss(real_images, fake_images, fake_output,
         mse_weight * mse + color_weight * color_loss_value)
 
     return loss, wasserstein_loss, optical_flow_loss_value, mse, color_loss_value
-
-def pretrain_generator_loss(real_images, fake_images):
-    """
-    Compute the loss for the pre-training of the generator,
-    which tries to minimize the mean squared error between the real and fake images,
-    and the difference between the optical flow of the real and fake images.
-
-    Args:
-        real_images: real images from the dataset
-        fake_images: generated images from the generator
-        wasserstein_weight: weight of the Wasserstein loss term
-        flow_weight: weight of the optical flow loss term
-        mse_weight: weight of the mean squared error loss term
-
-    Returns:
-        loss: loss value
-        wasserstein_loss: Wasserstein loss value
-        optical_flow_loss: optical flow loss value
-        mse: mean squared error loss value
-    """
-    flow_weight = 1
-    mse_weight = 1
-    color_weight = 0.05
-
-    # Compute the mean squared error between the real and fake images
-    mse = mean_squared_error(real_images, fake_images)
-
-    # Compute color loss
-    color_loss_value = color_loss(real_images, fake_images)
-
-    # Compute the optical flow between the real and fake images
-    optical_flow_target = 0
-    optical_flow_predicted = 0
-    optical_flow_loss = 0
-
-    for i in range(len(real_images)-1):
-        optical_flow_target += get_optical_flow_batch(real_images[i], real_images[i+1])
-    optical_flow_target /= len(real_images)-1
-
-    for i in range(len(fake_images)-1):
-        optical_flow_predicted += get_optical_flow_batch(fake_images[i], fake_images[i+1])
-    optical_flow_predicted /= len(fake_images)-1
-    
-    optical_flow_loss += tf.reduce_mean(tf.abs(optical_flow_target, optical_flow_predicted))
-    optical_flow_loss /= len(real_images)-1
-
-    # Combine the losses with the specified weights
-    loss = flow_weight * optical_flow_loss + mse_weight * mse + color_weight * color_loss_value
-
-    return loss
