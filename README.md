@@ -77,7 +77,7 @@ If you need access to the `saved_model` and `data` folders, please feel free to 
 ## Setting up the environment
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/ConditionalGANs.git
+    git clone https://github.com/GiuliaGhisolfi/ConditionalGANs.git
     cd ConditionalGANs
     ```
 
