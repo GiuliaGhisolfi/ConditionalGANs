@@ -24,6 +24,7 @@ We conducted experiments on two datasets: one containing objects and one without
 ConditionalGANs/
 │
 ├── generated_images/                 # Directory for storing generated images
+├── test_results/                     # Directory for storing GIFs generated for visualizing model predictions
 │
 ├── src/
 │   ├── autoencoders/
@@ -35,11 +36,14 @@ ConditionalGANs/
 │   ├── latent_vector_approximator.py # Code for approximating latent vectors
 │   ├── wgan.py                       # Wasserstein GAN (WGAN) implementation
 │
-├── .gitignore                         # Files to ignore in version control
-├── main_wgan.py                       # Main file for training the WGAN model
-├── requirements.txt                   # Python dependencies
-├── train_no_obj.ipynb                 # Jupyter Notebook for training using dataset without objects
-├── train_obj.ipynb                    # Jupyter Notebook for training using dataset with objects
+├── .gitignore                        # Files to ignore in version control
+├── main_wgan.py                      # Main file for training the WGAN model
+├── requirements.txt                  # Python dependencies
+│
+├── test_no_obj.ipynb                 # Jupyter Notebook for testing the model on a dataset without objects
+├── test_obj.ipynb                    # Jupyter Notebook for testing the model on a dataset with objects
+├── train_no_obj.ipynb                # Jupyter Notebook for training using dataset without objects
+├── train_obj.ipynb                   # Jupyter Notebook for training using dataset with objects
 ```
 
 ## Setting up the environment

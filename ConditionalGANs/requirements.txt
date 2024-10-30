@@ -6,6 +6,7 @@ category_encoders == 2.6.3
 cv2 == 4.5.4
 gputil == 1.4.0
 graphviz == 0.20.1
+imageio == 2.13.1
 importlib == 4.0.1
 ipython == 8.12.3
 json == 3.0.2
@@ -26,6 +27,7 @@ pytorch-lightning==2.2.3
 pytorch==0.6.97
 scikit-base==0.6.2
 sk-video==1.1.10
+skimage==0.0.3
 sklearn==0.0.post1
 sktime==0.25.8
 torch==2.2.1
