@@ -17,6 +17,16 @@ The discriminator features a series of convolutional layers that learn patterns 
 
 We conducted experiments on two datasets: one containing objects and one without. The results indicate that our model achieved satisfactory visual quality, demonstrating its effectiveness in generating coherent video sequences.
 
+## Demo
+
+| Real Frames          | Generated Frames        |
+|-----------------------|-------------------------|
+| <img width="250" alt="input" src="ConditionalGANs\test_results\obj\input_seq_0_gray_scale.gif"> | <img width="250" alt="input" src="ConditionalGANs\test_results\obj\generated_seq_0_gray_scale.gif"> |
+| <img width="250" alt="input" src="ConditionalGANs\test_results\obj\input_seq_702_gray_scale.gif"> | <img width="250" alt="input" src="ConditionalGANs\test_results\obj\generated_seq_702_gray_scale.gif"> |
+| <img width="250" alt="input" src="ConditionalGANs\test_results\no_obj\input_seq_100_gray_scale.gif"> | <img width="250" alt="input" src="ConditionalGANs\test_results\no_obj\generated_seq_100_gray_scale.gif"> |
+| <img width="250" alt="input" src="ConditionalGANs\test_results\no_obj\input_seq_200_gray_scale.gif"> | <img width="250" alt="input" src="ConditionalGANs\test_results\no_obj\generated_seq_200_gray_scale.gif"> |
+
+
 
 ## Folder Structure
 
