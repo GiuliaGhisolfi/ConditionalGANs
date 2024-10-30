@@ -46,6 +46,24 @@ ConditionalGANs/
 ├── train_obj.ipynb                   # Jupyter Notebook for training using dataset with objects
 ```
 
+### Notebooks Overview
+
+- **Training the Model with Custom Parameters**
+  - **`train_no_obj.ipynb`** - This notebook demonstrates how to train the Conditional GAN model on a dataset without objects. You can visualize the training process and adjust hyperparameters to experiment with custom configurations if you want to train the model from scratch or fine-tune it further.
+  - **`train_obj.ipynb`** - Similar to `train_no_obj.ipynb`, this notebook trains the model on a dataset containing background objects. It also allows for hyperparameter adjustments, providing flexibility to adapt the model to different scenarios.
+
+- **Testing the Pretrained Model with Selected Parameters**
+  - **`test_no_obj.ipynb`** - This notebook tests the pretrained model on a dataset without objects, using the best hyperparameter configuration selected from training. It includes visualization of generated frames and an option to recursively generate extended sequences.
+  - **`test_obj.ipynb`** - Tests the pretrained model on the dataset containing objects, again using the optimal parameter configuration chosen. Visuals of generated frames versus true frames are provided for evaluation.
+
+**To run these notebooks:**
+Add the `saved_model` and `data` folders to `ConditionalGANs/ConditionalGANs`.
+- `saved_model` is required only for testing notebooks.
+- `data` is required for both training and testing notebooks.
+
+If you need access to the `saved_model` and `data` folders, please feel free to contact me.
+
+
 ## Setting up the environment
 1. Clone the repository:
     ```bash
