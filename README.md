@@ -1,4 +1,4 @@
-# Conditional GANs
+# Conditional GANs 🤖🎞
 ### Conditional GANs for Video Prediction - Visual model for robot control
 
 This repository contains implementations of Conditional GANs (CGANs) and Autoencoders designed for video prediction tasks.
